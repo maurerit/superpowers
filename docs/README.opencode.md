@@ -17,6 +17,41 @@ registers all skills.
 
 Verify by asking: "Tell me about your superpowers"
 
+### Role-specific background subagents
+
+This fork routes implementation and review templates to dedicated OpenCode
+subagents. Define them in `opencode.json`:
+
+```json
+{
+  "model": "openai/gpt-5.6-sol",
+  "agent": {
+    "implementer": {
+      "description": "Background implementation worker for bounded Superpowers tasks.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-terra",
+      "permission": {
+        "task": "deny"
+      }
+    },
+    "reviewer": {
+      "description": "Background read-only reviewer for task, spec, plan, and branch reviews.",
+      "mode": "subagent",
+      "model": "openai/gpt-5.6-sol",
+      "permission": {
+        "edit": "deny",
+        "task": "deny",
+        "todowrite": "deny"
+      }
+    }
+  }
+}
+```
+
+`mode: "subagent"` keeps these roles out of the primary-agent Tab rotation;
+they remain available to OpenCode's `task` tool. Replace the model IDs if your
+provider uses different implementation and review tiers.
+
 OpenCode uses its own plugin install. If you also use Claude Code, Codex, or
 another harness, install Superpowers separately for each one.
 
@@ -107,7 +142,9 @@ The plugin does two things:
 Skills speak in actions rather than naming any one runtime's tools. On OpenCode these resolve to:
 
 - "Create a todo" / "mark complete in todo list" → `todowrite`
-- `Subagent (general-purpose):` template → OpenCode's `task` tool with `subagent_type: "general"` (or `"explore"` for codebase exploration)
+- implementation-role templates → OpenCode's `task` tool with `subagent_type: "implementer"`
+- review-role templates → OpenCode's `task` tool with `subagent_type: "reviewer"`
+- remaining `Subagent (general-purpose):` templates → OpenCode's `task` tool with `subagent_type: "general"` (or `"explore"` for codebase exploration)
 - "Invoke a skill" → OpenCode's native `skill` tool
 - "Read a file" → `read`
 - "Create a file" / "edit a file" / "delete a file" → `apply_patch`

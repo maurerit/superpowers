@@ -112,9 +112,21 @@ capable available model, not the session default.
 diff's size, complexity, and risk. A small mechanical diff does not need the
 most capable model; a subtle concurrency change does.
 
-**Always specify the model explicitly when dispatching a subagent.** An
-omitted model inherits your session's model — often the most capable and
-most expensive — which silently defeats this section.
+### OpenCode role routing
+
+OpenCode selects a subagent model through the named agent configuration, not
+through a per-dispatch model argument:
+
+- implementation and fix work → `implementer`
+- task, spec, plan, and whole-branch review → `reviewer`
+
+Do not dispatch these roles to OpenCode's `general` agent and do not invent a
+per-call `model` field that its task tool does not support. The configured
+named agent is the model boundary.
+
+On runtimes that support a per-dispatch model argument, always specify it. An
+omitted model may inherit the session's most capable and expensive model,
+silently defeating this section.
 
 **Turn count beats token price.** Wall-clock and context cost scale with how
 many turns a subagent takes, and the cheapest models routinely take 2-3× the

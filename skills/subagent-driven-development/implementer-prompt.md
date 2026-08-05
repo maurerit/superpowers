@@ -3,10 +3,12 @@
 Use this template when dispatching an implementer subagent.
 
 ```
-Subagent (general-purpose):
+Subagent (implementation role):
+  OpenCode agent: `implementer`
+  Other runtimes: `general-purpose`
   description: "Implement Task N: [task name]"
-  model: [MODEL — REQUIRED: choose per SKILL.md Model Selection; an omitted
-         model silently inherits the session's most expensive one]
+  model: [NON-OPENCODE ONLY — choose per SKILL.md Model Selection; OpenCode
+         gets the model from the configured `implementer` agent]
   prompt: |
     You are implementing Task N: [task name]
 

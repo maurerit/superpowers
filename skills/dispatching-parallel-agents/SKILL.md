@@ -67,10 +67,13 @@ Each agent gets:
 
 Issue all three subagent dispatches in the same response — they run in parallel:
 
+- OpenCode agent: `implementer`
+- Other runtimes: `general-purpose`
+
 ```text
-Subagent (general-purpose): "Fix agent-tool-abort.test.ts failures"
-Subagent (general-purpose): "Fix batch-completion-behavior.test.ts failures"
-Subagent (general-purpose): "Fix tool-approval-race-conditions.test.ts failures"
+Subagent (implementation role): "Fix agent-tool-abort.test.ts failures"
+Subagent (implementation role): "Fix batch-completion-behavior.test.ts failures"
+Subagent (implementation role): "Fix tool-approval-race-conditions.test.ts failures"
 # All three run concurrently.
 ```
 

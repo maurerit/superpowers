@@ -62,6 +62,7 @@ tests=(
     "test-plugin-loading.sh"
     "test-bootstrap-caching.sh"
     "test-role-routing.sh"
+    "test-execution-handoff.sh"
 )
 
 # Integration tests (require OpenCode)

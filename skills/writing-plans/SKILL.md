@@ -155,7 +155,7 @@ If you find issues, fix them inline. No need to re-review — just fix and move 
 
 ## Execution Handoff
 
-After saving the plan, offer execution choice:
+After saving the plan, offer the execution choice. STOP after saving the plan. Do not invoke an execution skill, dispatch an implementer, or edit implementation code until your human partner chooses an execution option. Approval of the spec, a request to "go ahead and implement", or permission to write the plan is not a choice of execution method.
 
 **"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Two execution options:**
 
@@ -164,6 +164,8 @@ After saving the plan, offer execution choice:
 **2. Inline Execution** - Execute tasks in this session using executing-plans, batch execution with checkpoints
 
 **Which approach?"**
+
+If your human partner already chose a method explicitly, follow that choice; otherwise ask "Which approach?" and wait for their reply. Don't infer a preference from silence or from a general request to implement.
 
 **If Subagent-Driven chosen:**
 - **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development
